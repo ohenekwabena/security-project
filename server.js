@@ -2,10 +2,13 @@ const https = require('https');
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const { default: helmet } = require('helmet');
 
 const PORT = 3000;
 
 const app = express();
+
+app.use(helmet());
 
 app.use(express.static(path.join(__dirname, 'public', 'index.html')));
 
