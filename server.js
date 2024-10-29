@@ -12,7 +12,29 @@ app.use(helmet());
 
 app.use(express.static(path.join(__dirname, 'public', 'index.html')));
 
-app.get('/secret', (req, res) => {
+function checkLoggedIn(req, res, next) {
+    const isLoggedIn = true;
+
+    if (!isLoggedIn) {
+        return res.status(401).json({ error: 'User not logged in' });
+    }
+
+    next();
+}
+
+app.get('/auth/google', (req, res) => {
+    // TODO
+})
+
+app.get('/auth/google/callback', (req, res) => {
+    // TODO
+})
+
+app.get('/auth/logout', (req, res) => {
+    // TODO
+})  
+
+app.get('/secret', checkLoggedIn, (req, res) => {
     res.send('Your secret value is 50!')
 })
 
